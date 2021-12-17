@@ -17,7 +17,7 @@ let createNewUser = async (data) => {
                 roleid: data.roleId
             })
             resolve('Create new user success!')
-        } catch (e) {
+        } catch (error) {
             reject(e);
         }
     })
@@ -28,12 +28,24 @@ let hashUserPassword = (password) => {
         try {
             var hashPassword = await bcrypt.hashSync(password, salt);
             resolve(hashPassword);
-        } catch (e) {
+        } catch (error) {
+            reject(e);
+        }
+    })
+}
+
+let getAllUser = () => {
+    return new Promise((resolve, reject) => {
+        try {
+            let users = db.User.findAll();
+            resolve(users);
+        } catch (error) {
             reject(e);
         }
     })
 }
 
 module.exports = {
-    createNewUser: createNewUser
+    createNewUser: createNewUser,
+    getAllUser: getAllUser
 }

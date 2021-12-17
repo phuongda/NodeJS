@@ -12,6 +12,7 @@ let initWebRouters = (app) => {
     router.get("/about", HomeController.getAboutPage);
     router.get("/crud", HomeController.getCRUD);
     router.post("/post-crud", HomeController.postCRUD);
+    router.get("/get-crud", HomeController.displayCRUD);
 
     return app.use("/", router) // khai báo sử dụng tất cả router đã khai báo
 }
