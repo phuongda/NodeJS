@@ -15,6 +15,7 @@ let initWebRouters = (app) => {
     router.get("/get-crud", HomeController.displayCRUD);
     router.get("/edit-crud", HomeController.getEditCRUD);
     router.post("/put-crud", HomeController.putCRUD);
+    router.get("/delete-crud", HomeController.deleteCRUD);
 
     return app.use("/", router) // khai báo sử dụng tất cả router đã khai báo
 }
