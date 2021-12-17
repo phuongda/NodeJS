@@ -26,9 +26,7 @@ let postCRUD = async (req, rep) => {
 }
 
 let displayCRUD = async (req, rep) => {
-    let data = await CRUDService.getAllUser({
-        raw: true
-    });
+    let data = await CRUDService.getAllUser();
     console.log('--------------------------------------------------');
     console.log(data);
     console.log('--------------------------------------------------');
@@ -37,10 +35,35 @@ let displayCRUD = async (req, rep) => {
     });
 }
 
+let getEditCRUD = async (req, rep) => {
+    let userId = req.query.id;
+    if (userId) {
+        let userData = await CRUDService.getUserInfoById(userId);
+        console.log('--------------------------------------------------');
+        console.log(userData);
+        console.log('--------------------------------------------------');
+        return rep.render('editCrud.ejs', {
+            userData: userData
+        });
+    } else {
+        return rep.send('Hello from edit page');
+    }
+}
+
+let putCRUD = async (req, rep) => {
+    let data = req.body;
+    let allUser = await CRUDService.updateUserData(data);
+    return rep.render('displayCrud.ejs', {
+        dataTable: allUser
+    });
+}
+
 module.exports = {
     getHomePage: getHomePage,
     getAboutPage: getAboutPage,
     getCRUD: getCRUD,
     postCRUD: postCRUD,
-    displayCRUD: displayCRUD
+    displayCRUD: displayCRUD,
+    getEditCRUD: getEditCRUD,
+    putCRUD: putCRUD,
 }
